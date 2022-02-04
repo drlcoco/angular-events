@@ -37,13 +37,17 @@ export class EventosShowComponent implements OnInit {
   constructor(private eventosServiceService : EventosServiceService) {}
   
   
-  ordenarFecha(){
+  ordenarFecha(enlaceEvento: Event) {
+    enlaceEvento.preventDefault();
     this.filterSearch = "";
-    this.eventos.sort((a,b)=>{
-      return a.date.getTime() - b.date.getTime();
+    this.eventos.sort((a, b) => {
+      const fecha1 = new Date(a.date);
+      const fecha2 = new Date(b.date);
+      return fecha1.getTime() - fecha2.getTime();
     })
   }
-  ordenarPrecio(){
+  ordenarPrecio(enlaceEvento: Event) {
+    enlaceEvento.preventDefault();
     this.filterSearch = "";
     this.eventos.sort((a,b)=>{
       return a.price - b.price;
@@ -52,9 +56,9 @@ export class EventosShowComponent implements OnInit {
   deleteEvent(evento: IEvento){
     this.eventos = this.eventos.filter((e)=> evento.title.toLocaleLowerCase()!=e.title.toLocaleLowerCase());
   }
-  crearEvento(evento:IEvento){
+  /* crearEvento(evento:IEvento){
     this.eventos.push(evento);
-  }
+  } */
 
   ngOnInit(): void {
     /* this.EventosServiceService.getEventos().subscribe(

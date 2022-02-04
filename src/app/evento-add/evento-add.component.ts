@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ComponentDeactivate } from '../guards/save-changes-guard.guard';
 import { IEvento } from '../interfaces/ievento';
 
 @Component({
@@ -6,12 +7,12 @@ import { IEvento } from '../interfaces/ievento';
   templateUrl: './evento-add.component.html',
   styleUrls: ['./evento-add.component.css']
 })
-export class EventoAddComponent implements OnInit {
+export class EventoAddComponent implements OnInit, ComponentDeactivate {
 
   newEvento: IEvento = {
     title: '',
     image: '',
-    date: new Date(),
+    date: "",
     description: '',
     price: 0,
   };
@@ -20,12 +21,12 @@ export class EventoAddComponent implements OnInit {
   constructor() { }
 
   addEvento() {
-    this.newEvento.date = new Date(this.newEvento.date);
+    this.newEvento.date = this.newEvento.date;
     this.crearEvento.emit(this.newEvento);
     this.newEvento = {
       title: '',
       image: '',
-      date: new Date(),
+      date: "",
       description: '',
       price: 0,
     };
@@ -40,7 +41,10 @@ export class EventoAddComponent implements OnInit {
       this.newEvento.image = reader.result as string;
     });
   }
-
+  
+  canDeactivate() {
+    return confirm("¿Quieres abandonar la página?. Los cambios no se guardarán");
+  }
   ngOnInit(): void {
   }
 

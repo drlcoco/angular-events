@@ -10,6 +10,16 @@ import { EventoAddComponent } from './evento-add/evento-add.component';
 import { EventosServiceService } from './services/eventos-service.service';
 import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Route, RouterModule } from '@angular/router';
+import { EventDetailsComponent } from './event-details/event-details.component';
+import { SaveChangesGuardGuard } from './guards/save-changes-guard.guard';
+
+const APP_ROUTES: Route[] = [
+  { path: 'eventos',component: EventosShowComponent },
+  { path: 'evento/add', canDeactivate: [SaveChangesGuardGuard], component: EventoAddComponent },
+  { path: 'evento/:id', component: EventDetailsComponent },
+  /* { path: '**', redirectTo: 'eventos', pathMatch: 'full' }, */
+]
 
 @NgModule({
   declarations: [
@@ -17,19 +27,21 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     EventosShowComponent,
     EventFilterPipe,
     EventoItemComponent,
-    EventoAddComponent
+    EventoAddComponent,
+    EventDetailsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(APP_ROUTES)
   ],
-  providers: [/* EventosServiceService,  *//* BaseUrlInterceptor,
+  providers: [/*  */
   {
     provide: HTTP_INTERCEPTORS,
     useClass: BaseUrlInterceptor,
     multi: true,
-  } */],
+  } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

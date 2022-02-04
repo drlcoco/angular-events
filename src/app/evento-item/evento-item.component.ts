@@ -11,7 +11,7 @@ export class EventoItemComponent implements OnInit {
   @Input() inputEvento: IEvento = {
     title:'',
     image:'',
-    date: new Date(),
+    date: "",
     description: '',
     price: 0
   };

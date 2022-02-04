@@ -1,11 +1,12 @@
 <div>
-  <img
+  <a class="nav-link" [routerLink]="['/evento', inputEvento.id]" [routerLinkActive]="['active']"><img
     [src]="inputEvento.image"
     [ngStyle]="{ 'height.px': imgHeight }"
     class="card-img-top"
-  />
+  /></a>
+
   <div class="card-body">
-    <h4 class="card-title">{{ inputEvento.title | titlecase }}</h4>
+    <a href="#"><h4 class="card-title">{{ inputEvento.title | titlecase }}</h4></a>
     <p class="card-text" [innerText]="inputEvento.description"></p>
     <div class="text-right">
       <button class="btn btn-danger ml-3" (click)="deleteEvento()">

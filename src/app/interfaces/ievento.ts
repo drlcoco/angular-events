@@ -4,5 +4,5 @@ export interface IEvento {
   description:string;
   image:string;
   price:number;
-  date:Date;
+  date:string;
 }
