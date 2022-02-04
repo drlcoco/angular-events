@@ -1,0 +1,43 @@
+<nav class="navbar navbar-light bg-light d-flex flex-row">
+  <ul class="navbar-nav d-flex flex-row">
+    <li class="nav-item mx-5">
+      <a class="nav-link" href="#" (click)="ordenarFecha()">Orden por fecha</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" (click)="ordenarPrecio()">Orden por precio</a>
+    </li>
+  </ul>
+  <form class="d-flex">
+    <input
+      type="text"
+      [(ngModel)]="filterSearch"
+      class="form-control"
+      name="filterDesc"
+      id="filterDesc"
+      placeholder="Filter..."
+    />
+    <label class="col-form-label col-sm-5"
+      >Filtrando por: {{ filterSearch }}</label
+    >
+  </form>
+</nav>
+
+<!-- Angular -->
+<div
+  class="card-columns mt-4"
+  *ngIf="eventos && eventos.length; else elseBlock"
+>
+  <!-- Aquí listaremos los eventos -->
+  <div class="row">
+    <div
+      class="col-sm-6"
+      *ngFor="let evento of eventos | eventFilter: filterSearch"
+    >
+    <app-evento-item [inputEvento]="evento" (deleteEvent)="deleteEvent($event)"></app-evento-item>
+    </div>
+  </div>
+</div>
+
+<ng-template #elseBlock><h3>No hay eventos disponibles</h3></ng-template>
+<app-evento-add (crearEvento)="crearEvento($event)"></app-evento-add>
+
