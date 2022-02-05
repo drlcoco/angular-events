@@ -1,0 +1,8 @@
+<div class="mt-4" *ngIf="eventoDetails; else elseBlock">
+	<app-evento-item [inputEvento]="eventoDetails"></app-evento-item>
+</div>
+<ng-template #elseBlock>
+	<h1 class="alert" role="alert">
+		No se ha creado ningún evento
+	</h1>
+</ng-template>

@@ -1,0 +1,21 @@
+<div>
+  <a class="nav-link" [routerLink]="['/evento', inputEvento.id]" [routerLinkActive]="['active']"><img
+    [src]="inputEvento.image"
+    [ngStyle]="{ 'height.px': imgHeight }"
+    class="card-img-top"
+  ></a>
+
+  <div class="card-body">
+    <a class="nav-link" [routerLink]="['/evento', inputEvento.id]" [routerLinkActive]="['active']"><h4 class="card-title">{{ inputEvento.title | titlecase }}</h4></a>
+    <p class="card-text" [innerText]="inputEvento.description"></p>
+    <div class="text-right">
+      <button class="btn btn-danger ml-3" (click)="deleteEvento()">
+        Delete
+      </button>
+    </div>
+  </div>
+  <div class="card-footer text-muted d-flex justify-content-between">
+    {{ inputEvento.date | date: "dd/MM/y" }}
+    <span class="float-right">{{ inputEvento.price | currency: "EUR" }}€</span>
+  </div>
+</div>
